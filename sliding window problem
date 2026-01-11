@@ -1,0 +1,47 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Maximum Sum of Subarray of size K|->
+---------------------------------
+code:-
+const maxSumSubarray = (arr, k) => {
+  let i = 0;          // Left pointer
+  let j = 0;          // Right pointer
+  let sum = 0;        // Current window sum
+  let maxSum = -Infinity;
+
+  while (j < arr.length) {
+    // Step 1: Add current element to the window
+    sum += arr[j];
+
+    // Step 2: Check window size
+    const windowSize = j - i + 1;
+
+    // If window size is less than k, just move j
+    if (windowSize < k) {
+      j++;
+    }
+    // If window size is exactly k
+    else if (windowSize === k) {
+      // Update maxSum
+      maxSum = Math.max(maxSum, sum);
+
+      // Step 3: Slide the window
+      // Remove left element
+      sum -= arr[i];
+
+      // Move both pointers
+      i++;
+      j++;
+    }
+  }
+
+  return maxSum;
+};
+
+// Example
+const arr = [2, 1, 5, 1, 3, 2];
+const k = 3;
+
+console.log(maxSumSubarray(arr, k)); // Output: 9
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
